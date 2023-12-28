@@ -1,0 +1,19 @@
+[
+  {
+    "title": "Camera",
+    "description": "All about the camera ",
+    "category": "camera",
+    "numViews": 38,
+    "isLiked": false,
+    "isDisliked": false,
+    "likes": [],
+    "dislikes": [],
+    "author": "Admin",
+    "images": [
+      {
+        "image": "/images/blog-1.jpg",
+        "_id": "655caae09dc25d90e9342191"
+      }
+    ]
+  }
+]

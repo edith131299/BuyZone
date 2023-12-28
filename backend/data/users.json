@@ -1,0 +1,42 @@
+[{
+  "firstName": "sid",
+ "lastName": "venkat",
+ "email": "sudakarvenkat023@gmail.com",
+ "mobile": "9941711138",
+ "password": "$2b$10$5u.oQIPYlJYiKMsfwXaA5OxVv4jImjKoZKMhPcdmtcXSlShmKj7Kq",
+ "role": "admin",
+ "isBlocked": false,
+ "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWIyOWY5YTdmNDczNWRkOGNkYzU2OSIsImlhdCI6MTcwMzY5MjI1NywiZXhwIjoxNzAzNzc4NjU3fQ.3rDVOUwYFTB1C5KEGwjpmss5UJvJIRX9lM6A-LGkMdk",
+ "cart": [],
+
+ "address": "no addr4ess",
+ "avatar": "http://localhost:8000/upload/user/54.jpg"
+},
+{
+  "firstName": "sudakar",
+ "lastName": "james",
+ "email": "fridayjames@gmail.com",
+ "password": "$2b$10$dtQMNNu6E6LVXR2u18nIROVFyKWf1j9Gxj/3jDd9p6lG1hoEfkPFK",
+ "role": "user",
+ "avatar": "http://127.0.0.1:8000/upload/user/user.jpg",
+ "isBlocked": false,
+ "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjJkN2M5ZjBiNDA1ZTEwMmVmNTU3NyIsImlhdCI6MTcwMDk3NjU4NSwiZXhwIjoxNzAxMDYyOTg1fQ.UN-EZfj9b3KeJ0PGWpcGycblrUceZQX7vMmnF0rYaew",
+ "cart": [],
+ "wishList": []
+
+},
+{
+  "firstName": "Dharshan",
+ "lastName": "Rudra",
+ "email": "kannursquad@gmail.com",
+ "mobile": "999999999",
+ "password": "$2b$10$RdwOxBtt80hO/3E/t6XecOK4LvgMfNlKJS3Ww4y6q/y.ELh2lRdPO",
+ "role": "user",
+ "avatar": "http://127.0.0.1:8000/upload/user/IMG-20230418-WA0000.jpg",
+ "isBlocked": false,
+ "refreshToken": "",
+ "cart": [],
+ "wishList": []
+ 
+}
+]

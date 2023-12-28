@@ -1,0 +1,114 @@
+[
+  {
+    "title": "Sony Camera new model",
+    "slug": "sony-camera-new-model",
+    "description": "4K movies and pro-level features, Natural-looking images that match what you see, Cleaner images even in dim light, Creative movie production, High-resolution 4K recording, Create time-lapse movies, Vlog with useful features, Take advantage of various movie functions, A high resolution LCD monitor with handy touchscreen functions, Incredible image quality, Sophisticated eye recognition and tracking, Persistent tracking ability, High speed continuous shooting with AF/AE tracking, Bluetooth & NFC, Touch Screen",
+    "price": 50,
+    "category": "camera",
+    "brand": "sony",
+    "quantity": 4,
+    "sold": 0,
+    "images": [
+      {
+        "image": "http://127.0.0.1:8000/upload/product/camera.jpg",
+        "_id": "655d6f1bfc22e390ac8d9c76"
+      },
+      {
+        "image": "http://127.0.0.1:8000/upload/product/camera.jpg"
+      }
+    ],
+    "color": ["6558502e8f6001fa3724f616"],
+    "tags": "popular",
+    "totalrating": "3",
+    "ratings": [
+      {
+        "star": 3,
+        "comment": "jhgj",
+        "postedBy": "656e08f24008980c811c5719"
+      }
+    ]
+  },
+  {
+    "title": "Mesh Strap All Black Avatar Day and Date Functioning Quartz Analog Watch - For Men LS2917",
+    "slug": "mesh-strap-all-black-avatar-day-and-date-functioning-quartz-analog-watch-for-men-ls2917",
+    "description": "The best services with assured products... it's really worth it..And as usual the services is on time ... Now about the watch ,I am very much satisfied with the best stunning finishing of silver coated texture of this watch this make it classic and the silver coated texture sometimes looks like a lead colour which is more likable to me... well it's depend on the incident of light and it's intensity....",
+    "price": 50000,
+    "category": "watch",
+    "brand": "titan",
+    "quantity": 3,
+    "sold": 1,
+    "images": [
+      {
+        "image": "http://127.0.0.1:8000/upload/product/watch.jpg"
+      },
+      {
+        "image": "http://127.0.0.1:8000/upload/product/watch-2.jpg.webp"
+      }
+    ],
+    "color": ["6558502e8f6001fa3724f616"],
+    "tags": "special",
+    "totalrating": "0",
+    "ratings": []
+  },
+  {
+    "title": "Acer One Core i3 11th Gen 1115G4 - (8 GB/512 GB SSD/Windows 11 Home) AO 14 Z 8-415 Thin and Light Laptop  (14 Inch, Silver, 1.49 Kg)",
+    "slug": "acer-one-core-i3-11th-gen-1115g4-(8-gb512-gb-ssdwindows-11-home)-ao-14-z-8-415-thin-and-light-laptop-(14-inch-silver-1.49-kg)",
+    "description": "You can experience the power of the Intel Core processor and Intel Iris Graphics card to reign over the game world. The 8 GB of RAM with an upgradable RAM of 32 GB are featured in this laptop so that you have enough space to store for all your applications. The sleek and minimalist design of this laptop makes it classy and portable so that you can easily carry it with you wherever you want. The whooping 512 GB of M.2PCIe SSD ensures maximum storage capacity to this Acer laptop. With a wide range of ports you can easily connect multiple devices at the same time to enhance your productivity.",
+    "price": 50000,
+    "category": "laptop",
+    "brand": "acer",
+    "quantity": 3,
+    "sold": 1,
+    "images": [
+      {
+        "image": "http://127.0.0.1:8000/upload/product/laptop.jpg"
+      },
+      {
+        "image": "http://127.0.0.1:8000/upload/product/laptop-2.jpg"
+      }
+    ],
+    "color": ["6558502e8f6001fa3724f616"],
+    "tags": "featured",
+    "totalrating": "4",
+    "ratings": [
+      {
+        "star": 4,
+        "comment": "sqsq",
+        "postedBy": "655b29f9a7f4735dd8cdc569"
+      }
+    ]
+  },
+  {
+    "title": "One Core i3 11th Gen 1115G4 - (8 GB/512 GB SSD/Windows 11 Home) AO 14 Z 8-415 Thin and Light Laptop  (14 Inch, Silver, 1.49 Kg)",
+    "slug": "one-core-i3-11th-gen-1115g4-(8-gb512-gb-ssdwindows-11-home)-ao-14-z-8-415-thin-and-light-laptop-(14-inch-silver-1.49-kg)",
+    "description": "You can experience the power of the Intel Core processor and Intel Iris Graphics card to reign over the game world. The 8 GB of RAM with an upgradable RAM of 32 GB are featured in this laptop so that you have enough space to store for all your applications. The sleek and minimalist design of this laptop makes it classy and portable so that you can easily carry it with you wherever you want. The whooping 512 GB of M.2PCIe SSD ensures maximum storage capacity to this Acer laptop. With a wide range of ports you can easily connect multiple devices at the same time to enhance your productivity.",
+    "price": 50000,
+    "category": "laptop",
+    "brand": "acer",
+    "quantity": -2,
+    "sold": 6,
+    "images": [
+      {
+        "image": "http://127.0.0.1:8000/upload/product/laptop.jpg"
+      },
+      {
+        "image": "http://127.0.0.1:8000/upload/product/laptop-2.jpg"
+      }
+    ],
+    "color": ["6558502e8f6001fa3724f616"],
+    "tags": "featured",
+    "totalrating": "3",
+    "ratings": [
+      {
+        "star": 1,
+        "comment": "very bad",
+        "postedBy": "655b29f9a7f4735dd8cdc569"
+      },
+      {
+        "star": 4,
+        "comment": "dsffd",
+        "postedBy": "656e08f24008980c811c5719"
+      }
+    ]
+  }
+]

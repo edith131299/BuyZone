@@ -1,0 +1,33 @@
+[
+  {
+    "user": "655b29f9a7f4735dd8cdc569",
+
+    "shippingInfo": {
+      "firstName": "sudakar",
+      "lastName": "venkat",
+      "address": "no.7,Kumbakonam street",
+      "city": "chennai",
+      "state": "TamilNadu",
+      "pincode": 3333
+    },
+    "paymentInfo": {
+      "razorpayOrderId": "order_N4gxE1EYioIOID",
+      "razorpayPaymentId": "pay_N4gxQcHW0zL1gb"
+    },
+    "orderItems": [
+      {
+        "product": "655d71b9fc22e390ac8d9c79",
+
+        "color": "6558502e8f6001fa3724f616",
+
+        "quantity": 2,
+        "price": 50000,
+        "_id": "6561dc170c05f833020dde59"
+      }
+    ],
+    "totalPrice": 100000,
+    "totalPriceAfterDiscount": 100000,
+
+    "status": "Ordered"
+  }
+]
