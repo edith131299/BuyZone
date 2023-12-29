@@ -118,7 +118,7 @@ const Checkout = () => {
         };
 
         const result = await axios.post(
-          "http://localhost:8000/api/user/order/paymentVerification",
+          "http://13.48.70.125:8000/api/user/order/paymentVerification",
           data
         );
 
