@@ -4,7 +4,11 @@ import { BiArrowBack } from "react-icons/bi";
 import Container from "../components/Container";
 import Metadata from "../components/MetaData";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder, emptyMyCart, getUserCart } from "../features/User/userSlice";
+import {
+  createOrder,
+  emptyMyCart,
+  getUserCart,
+} from "../features/User/userSlice";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
@@ -26,7 +30,7 @@ const Checkout = () => {
 
   const cart = useSelector((state) => state.authState);
 
-  const {myOrders} = useSelector((state)=>state.authState)
+  const { myOrders } = useSelector((state) => state.authState);
 
   const [totalAmount, setTotalAmount] = useState(null);
 
@@ -88,7 +92,7 @@ const Checkout = () => {
 
     // Authenticate error in below code
     const result = await axios.post(
-      "http://localhost:8000/api/user/order/checkout",
+      "http://13.48.70.125:8000/api/user/order/checkout",
       { amount: totalAmount }
     );
 
@@ -126,11 +130,11 @@ const Checkout = () => {
           })
         );
 
-       if(myOrders){
-         localStorage.removeItem("address")
-         dispatch(emptyMyCart())
-        navigate("/my-orders")
-       }
+        if (myOrders) {
+          localStorage.removeItem("address");
+          dispatch(emptyMyCart());
+          navigate("/my-orders");
+        }
       },
       prefill: {
         name: "BuyZone",
