@@ -92,7 +92,7 @@ const Checkout = () => {
 
     // Authenticate error in below code
     const result = await axios.post(
-      "http://13.48.70.125:8000/api/user/order/checkout",
+      "http://13.51.169.22:8000/api/user/order/checkout",
       { amount: totalAmount }
     );
 
@@ -118,7 +118,7 @@ const Checkout = () => {
         };
 
         const result = await axios.post(
-          "http://13.48.70.125:8000/api/user/order/paymentVerification",
+          "http://13.51.169.22:8000/api/user/order/paymentVerification",
           data
         );
 
