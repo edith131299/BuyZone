@@ -4,6 +4,8 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { HiOutlineArrowLeft } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleBlog } from "../features/Blog/blogSlice";
+import Container from "../components/Container";
+import Metadata from "../components/MetaData";
 
 const SingleBlog = () => {
   const location = useLocation();
@@ -18,33 +20,23 @@ const SingleBlog = () => {
   }, []);
   return (
     <>
-      <BreadCrumb title={"Sign Up"} />
-      <div className="blog-wrapper home-wrapper-2 py-5">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <div className="single-blog-card">
-                <Link
-                  to={"/blogs"}
-                  className="d-flex align-items-center gap-10 "
-                >
-                  <HiOutlineArrowLeft className="fs-5" />
-                  Go Back to Blogs
-                </Link>
-                <h3 className="title" style={{ "margin-top": "24px" }}>
-                  {singleBlog?.title}
-                </h3>
-                <img
-                  src={singleBlog?.images[0].image}
-                  alt="blog-image"
-                  className="blog-image w-100 my-4"
-                />
-                <p className="mt-10">{singleBlog?.description}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <BreadCrumb title={"Blogs"} />
+      <Metadata title={"Blog"} />
+      <Container class1="py-5 max-sm:mx-3">
+        <Link to={"/blogs"} className="flex items-center gap-3 mt-1 text-[#777]">
+          <HiOutlineArrowLeft className="text-2xl " />
+          Go Back to Blogs
+        </Link>
+        <h3 className="mt-6 font-medium text-2xl" >
+          {singleBlog?.title}
+        </h3>
+        <img
+          src={singleBlog?.images[0].image}
+          alt="blog-image"
+          className="w-4/5 my-4"
+        />
+        <p className="my-10 text-justify whitespace-break-spaces ">{singleBlog?.description}</p>
+      </Container>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import Container from "../components/Container";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Metadata from "../components/MetaData";
@@ -10,46 +10,57 @@ const MyProfile = () => {
   return (
     <>
       <Metadata title={"My Profile"} />
-      <Container class1="cart-wrapper home-wrapper-2 py-5  ">
-        <div className="row mt-5 ">
-          <div className="col-12 profile-header  ">
-            <div className=" profile-Picture">
-              <figure className="avatar-img">
+      <Container class1="py-12  ">
+
+        <div className="flex  justify-center gap-20 my-8 max-sm:flex-col max-sm:gap-6" >
+          
+
+            <div className="  flex flex-col items-center gap-5">
+
+              <figure className="w-60 h-60 rounded-full overflow-hidden">
                 <img
-                  className="rounded-circle img-fluid "
-                    style={{height:"200px",width:"230px"}}
+                  className=" object-cover w-full h-full  "
+                    
                   src={user?.avatar ?? "/images/default_avatar.png"}
                   alt={user?.name}
                 />
               </figure>
+
               <Link
                 to="/myprofile/update"
                 id="edit_profile"
-                className="btn btn-primary btn-block my-5"
+                className="rounded-3xl font-medium  bg-blue text-white py-3 text-sm px-5 my-5 "
               >
                 Edit Profile
               </Link>
+
             </div>
-            <div className="col-6 col-md-5 ">
-              <h4>Full Name</h4>
-              <p>{user?.firstName + " " + user?.lastName}</p>
 
-              <h4>Email Address</h4>
-              <p>{user?.email}</p>
+            <div className="flex flex-col gap-4 ml-8 ">
+              <h4 className="text-2xl font-medium">Full Name</h4>
+              <p className="mt-[-2px] text-base">{user?.firstName + " " + user?.lastName}</p>
 
-              <h4>Mobile Number</h4>
-              <p>{user?.mobile}</p>
+              <h4 className="text-2xl font-medium">Email Address</h4>
+              <p className="mt-[-2px text-base" >{user?.email}</p>
 
-              <Link to={"/orders"} className="btn btn-danger  mt-5 me-3">
+              <h4 className="text-2xl font-medium">Mobile Number</h4>
+              <p className="mt-[-2px">{user?.mobile}</p>
+
+              <div>
+              <Link to={"/orders"} className="rounded-3xl font-medium  bg-blue text-white py-3 text-sm px-5 mt-5 me-6">
                 My Orders
               </Link>
 
-              <Link to="/changePassword" className="btn btn-primary  mt-5">
+              <Link to="/changePassword" className="rounded-3xl font-medium  bg-red-600 text-white py-3 text-sm px-4 mt-5 me-3">
                 Change Password
               </Link>
+              </div>
+      
             </div>
-          </div>
+            
+       
         </div>
+
       </Container>
     </>
   );

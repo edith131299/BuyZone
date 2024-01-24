@@ -10,7 +10,7 @@ const PreviewImage = ({ file }) => {
       setPreview(reader.result);
     };
   }
-  return <img src={preview} name="avatar" alt="avatar" />;
+  return <img src={preview} name="avatar" alt="avatar" className="object-cover w-4/5 h-full" />;
 };
 
 export default PreviewImage;

@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../features/Product/productSlice";
 import Metadata from "../components/MetaData";
 import Loader from "./Utils/loader";
+import Container from "../components/Container";
 
-const OurStore = () => {
+const OurStore = (search) => {
+
+  console.log(search);
+
   const [grid, setGrid] = useState();
 
   const dispatch = useDispatch();
@@ -39,23 +43,28 @@ const OurStore = () => {
 
   const getProducts = () => {
     dispatch(
-      getAllProducts({ sort, brand, tag, minPrice, maxPrice, category })
+      getAllProducts({ sort, brand, tag, minPrice, maxPrice, category ,search})
     );
   };
 
   // Get All Products UseEffect
   useEffect(() => {
-    if (!products) {
+    
       getProducts();
-    }
-  }, [sort, brand, tag, minPrice, maxPrice, category]);
+    
+    
+  }, [sort, brand, tag, minPrice, maxPrice, category,search]);
+
 
   //Filter Use Effect
 
   useEffect(() => {
     let newBrands = [];
+
     let newCategories = [];
+
     let newTags = [];
+
     products &&
       products.map((product) => {
         newBrands.push(product.brand);
@@ -66,6 +75,7 @@ const OurStore = () => {
     setBrands([...new Set(newBrands)]);
     setCategories([...new Set(newCategories)]);
     setTags([...new Set(newTags)]);
+    console.log(brand);
   }, []);
 
   return (
@@ -77,157 +87,171 @@ const OurStore = () => {
         <Loader />
       ) : (
         <>
-          <div className="store-wrapper home-wrapper-2 py-5">
-            <div className="container-xxl">
-              <div className="row">
-                <div className="col-3">
-                  <div className="filter-card mb-3">
-                    <h3 className="filter-title">Show By Categories</h3>
+          <Container class1=" my-6 py-5 ">
+            <div className="flex gap-8 max-sm:flex-col max-sm:justify-center max-sm:items-center ">
+              <div className="w-1/4 flex flex-col gap-4 max-sm:w-4/5">
+                <div className=" bg-white p-6 mb-3 rounded-lg max-sm:py-4">
+                  <h3 className="text-xl font-medium mb-4 max-sm:text-md ">
+                    Show By Categories
+                  </h3>
+                  <div className="max-sm:flex max-sm:gap-4 max-sm:flex-wrap max-sm:text-sm">
                     {categories &&
                       categories.map((category, index) => {
                         return (
                           <ul
                             key={index}
                             onClick={() => setCategory(category)}
-                            className="ps-0"
+                            className=" "
                           >
-                            <li>{category}</li>
+                            <li className="mb-5 text-[#777] text-base">
+                              {category}
+                            </li>
                           </ul>
                         );
                       })}
                   </div>
-                  <div className="filter-card mb-3">
-                    <h3 className="filter-title">Filter By </h3>
-
-                    <div>
-                      <h5 className="sub-title">Price</h5>
-                      <div className="d-flex align-items-center gap-10">
-                        <div className="form-floating ">
-                          <input
-                            type="email"
-                            className="form-control "
-                            id="floatingInput"
-                            placeholder="From"
-                            onChange={(e) => setMinPrice(e.target.value)}
-                          />
-                          <label htmlFor="floatingInput">From</label>
-                        </div>
-                        <div className="form-floating ">
-                          <input
-                            type="email"
-                            className="form-control "
-                            id="floatingInput"
-                            placeholder="To"
-                            onChange={(e) => setMaxPrice(e.target.value)}
-                          />
-                          <label htmlFor="floatingInput1">To</label>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-4 mb-4">
-                      <h3 className="filter-title">Product Tags</h3>
-                      <div>
-                        <div className="product-tag d-flex flex-wrap align-items-center gap-10">
-                          {tags &&
-                            tags.map((tag, index) => {
-                              return (
-                                <span
-                                  key={index}
-                                  onClick={() => setTag(tag)}
-                                  className="badge fs-6 bg-light text-secondary  rounded-3 py-2 px-3"
-                                >
-                                  {tag}
-                                </span>
-                              );
-                            })}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="sub-title">
-                      <h3 className="filter-title">Product brands</h3>
-                      <div>
-                        <div className="product-tag d-flex flex-wrap align-items-center gap-10">
-                          {brands &&
-                            brands.map((brand, index) => {
-                              return (
-                                <span
-                                  key={index}
-                                  onClick={() => setBrand(brand)}
-                                  className="badge fs-6 bg-light text-secondary  rounded-3 py-2 px-3"
-                                >
-                                  {brand}
-                                </span>
-                              );
-                            })}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                <div className="col-9">
-                  <div className="filter-sort-grid mb-4">
-                    <div className="d-flex justify-content-between align-items-center">
-                      <div className="d-flex align-items-center gap-10">
-                        <p className="mb-0 d-block " style={{ width: "100px" }}>
-                          Sort By:
-                        </p>
-                        <select
-                          name=""
-                          className="form-control form-select"
-                          id=""
-                          onChange={(e) => setSort(e.target.value)}
+
+                <div className="  bg-white p-6 mb-3 rounded-lg">
+                  <h3 className="text-xl font-medium mb-4">Filter By </h3>
+
+                  <div>
+                    <h5 className="font-medium mb-3">Price</h5>
+
+                    <div className="flex  items-center ">
+                      <div className=" ">
+                        <input
+                          type="number"
+                          className="border border-zinc-400 outline-none px-2 py-3 w-4/5  text-black "
+                          id="floatingInput"
+                          placeholder="From"
+                          onChange={(e) => setMinPrice(e.target.value)}
+                        />
+                        <label
+                          className="hidden text-black"
+                          htmlFor="floatingInput"
                         >
-                          <option value="title">Alphabetically, A-Z</option>
-                          <option value="-title">Alphabetically, Z-A</option>
-                          <option value="price">Price, Low to High</option>
-                          <option value="-price">Price, High to Low </option>
-                          <option value="createdAt">Date, old to new</option>
-                          <option value="-createdAt">Date, new to old</option>
-                        </select>
+                          From
+                        </label>
                       </div>
-                      <div className="d-flex align-items-center gap-10">
-                        <p className="totalproducts mb-0 ">21 Products</p>
-                        <div className="d-flex grid gap-10 align-items-center">
-                          <img
-                            onClick={() => setGrid(3)}
-                            className="d-block img-fluid "
-                            src="/images/gr4.svg"
-                            alt="grid"
-                          />
 
-                          <img
-                            onClick={() => setGrid(4)}
-                            className="d-block img-fluid "
-                            src="/images/gr3.svg"
-                            alt="grid"
-                          />
-                          <img
-                            onClick={() => setGrid(6)}
-                            className="d-block img-fluid "
-                            src="/images/gr2.svg"
-                            alt="grid"
-                          />
-
-                          <img
-                            onClick={() => setGrid(12)}
-                            className="d-block img-fluid "
-                            src="/images/gr.svg"
-                            alt="grid"
-                          />
-                        </div>
+                      <div className=" ">
+                        <input
+                          type="number"
+                          className=" outline-none border border-zinc-400 px-2 py-3 w-4/5 text-black "
+                          id="floatingInput"
+                          placeholder="To"
+                          onChange={(e) => setMaxPrice(e.target.value)}
+                        />
+                        <label className="hidden" htmlFor="floatingInput1">
+                          To
+                        </label>
                       </div>
                     </div>
                   </div>
 
-                  <div className="products-list pb-5">
-                    <div className="d-flex gap-10 flex-wrap">
-                      <ProductCard data={products} grid={grid} />
+                  <div className=" mt-4 mb-4">
+                    <h5 className="font-medium mb-4">Product Tags</h5>
+                    <div>
+                      <div className="flex flex-wrap items-center gap-4">
+                        {tags &&
+                          tags.map((tag, index) => {
+                            return (
+                              <span
+                                key={index}
+                                onClick={() => setTag(tag)}
+                                className=" bg-[#f8f9fa] text-base font-bold text-[#6c757d]  rounded-md py-2 px-3"
+                              >
+                                {tag}
+                              </span>
+                            );
+                          })}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="sub-title">
+                    <h3 className="font-medium mb-4">Product brands</h3>
+
+                    <div className="flex flex-wrap items-center gap-4">
+                      {brands &&
+                        brands.map((brand, index) => {
+                          return (
+                            <span
+                              key={index}
+                              onClick={() => setBrand(brand)}
+                              className="bg-[#f8f9fa] text-base font-bold text-[#6c757d]  rounded-md py-2 px-3"
+                            >
+                              {brand}
+                            </span>
+                          );
+                        })}
                     </div>
                   </div>
                 </div>
               </div>
+
+              <div className="w-3/4 flex flex-col">
+                <div className="flex justify-between items-center bg-white rounded-md py-4 px-4 max-sm:text-sm max-sm:flex-col max-sm:items-start max-sm:gap-2 ">
+                  <div className="flex items-center gap-3">
+                    <p className="mb-0 d-block ">Sort By:</p>
+
+                    <select
+                      name=""
+                      className="form-control form-select"
+                      id=""
+                      onChange={(e) => setSort(e.target.value)}
+                    >
+                      <option value="title">Alphabetically, A-Z</option>
+                      <option value="-title">Alphabetically, Z-A</option>
+                      <option value="price">Price, Low to High</option>
+                      <option value="-price">Price, High to Low </option>
+                      <option value="createdAt">Date, old to new</option>
+                      <option value="-createdAt">Date, new to old</option>
+                    </select>
+                  </div>
+
+                  <div className="flex items-center gap-10">
+                    <p className="totalproducts mb-0 ">21 Products</p>
+                    {/* <div className="flex  gap-4 items-center">
+                      <img
+                        onClick={() => setGrid(3)}
+                        className="d-block img-fluid "
+                        src="/images/gr4.svg"
+                        alt="grid"
+                      />
+
+                      <img
+                        onClick={() => setGrid(4)}
+                        className="d-block img-fluid "
+                        src="/images/gr3.svg"
+                        alt="grid"
+                      />
+                      <img
+                        onClick={() => setGrid(6)}
+                        className="d-block img-fluid "
+                        src="/images/gr2.svg"
+                        alt="grid"
+                      />
+
+                      <img
+                        onClick={() => setGrid(12)}
+                        className="d-block img-fluid "
+                        src="/images/gr.svg"
+                        alt="grid"
+                      />
+                    </div> */}
+                  </div>
+                </div>
+
+                <div className="products-list pb-5">
+                  <div className="flex gap-4 flex-wrap">
+                    <ProductCard data={products} grid={grid} />
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          </Container>
         </>
       )}
     </>
@@ -235,4 +259,3 @@ const OurStore = () => {
 };
 
 export default OurStore;
-<img src="/images/watch.jpg" className="" alt="" />;

@@ -186,17 +186,16 @@ const Checkout = () => {
   return (
     <>
       <Metadata title={"Checkout-Buy Zone"} />
-      <Container class1="checkout-wrapper py-5 home-wrapper-2">
-        {" "}
-        <div className="row">
-          <div className="col-7">
-            <div className="checkout-left-data"></div>
-            <h3 className="website-name">Buy Zone</h3>
+      <Container class1="py-5 flex  mt-8">
+        <div className="flex flex-row max-sm:flex-col max-sm:mx-4 ">
+          <div className="w-3/5 max-sm:w-full ">
+            <h3 className="text-3xl font-medium">Buy Zone</h3>
+
             <nav
               style={{ "--bs-breadcrumb-divider": ">" }}
               aria-label="breadcrumb"
             >
-              <ol className="breadcrumb">
+              <ol className="flex gap-2 my-3">
                 <li className="breadcrumb-item">
                   <Link className="text-dark total-price" to={"/cart"}>
                     Cart
@@ -218,24 +217,27 @@ const Checkout = () => {
               </ol>
             </nav>
 
-            <h4 className="title total">Contact Information</h4>
+            <h4 className="text-md font-medium mt-6 mb-4">
+              Contact Information
+            </h4>
 
-            <p className="user-details total">Sudakar V (emailid)</p>
+            <p className="text-md  ">Sudakar V (emailid)</p>
 
-            <h4 className="mb-3">Shipping Address</h4>
+            <h4 className="text-3xl font-medium my-5">Shipping Address</h4>
+
             <form
               action=""
               onSubmit={formik.handleSubmit}
-              className="d-flex flex-wrap gap-15 justify-content-between"
+              className="flex flex-col  flex-wrap gap-4 justify-between"
             >
-              <div className="w-100">
+              <div className="">
                 <select
                   name="country"
                   value={formik.values.country}
                   onChange={formik.handleChange("country")}
                   onBlur={formik.handleBlur("country")}
                   id=""
-                  className="form-control form-select"
+                  className="w-11/12 rounded-sm p-2 border border-zinc-400 outline-none"
                 >
                   <option value="" selected disabled>
                     Select Country
@@ -248,37 +250,41 @@ const Checkout = () => {
                 </div>
               </div>
 
-              <div className="flex-grow-1">
-                <input
-                  type="text"
-                  placeholder="First Name"
-                  className="form-control"
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange("firstName")}
-                  onBlur={formik.handleBlur("firstName")}
-                />
-                <div className="error text-danger ms-2 my-2 ">
-                  {formik.touched.firstName && formik.errors.firstName}
+              <div className="flex gap-2  w-11/12">
+                <div className="w-full">
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    className="w-full rounded-sm p-2 border border-zinc-400 outline-none"
+                    value={formik.values.firstName}
+                    onChange={formik.handleChange("firstName")}
+                    onBlur={formik.handleBlur("firstName")}
+                  />
+                  <div className="error text-danger ms-2 my-2 ">
+                    {formik.touched.firstName && formik.errors.firstName}
+                  </div>
+                </div>
+
+                <div className="w-full">
+                  <input
+                    type="text"
+                    placeholder="Last Name"
+                    className="w-full rounded-sm p-2 border border-zinc-400 outline-none"
+                    value={formik.values.lastName}
+                    onChange={formik.handleChange("lastName")}
+                    onBlur={formik.handleBlur("lastName")}
+                  />
+                  <div className="error text-danger ms-2 my-2 ">
+                    {formik.touched.lastName && formik.errors.lastName}
+                  </div>
                 </div>
               </div>
-              <div className="flex-grow-1">
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  className="form-control"
-                  value={formik.values.lastName}
-                  onChange={formik.handleChange("lastName")}
-                  onBlur={formik.handleBlur("lastName")}
-                />
-                <div className="error text-danger ms-2 my-2 ">
-                  {formik.touched.lastName && formik.errors.lastName}
-                </div>
-              </div>
+
               <div className="w-100">
                 <input
                   type="text"
                   placeholder="Address"
-                  className="form-control"
+                  className="w-11/12 rounded-sm p-2 border border-zinc-400 outline-none"
                   value={formik.values.address}
                   onChange={formik.handleChange("address")}
                   onBlur={formik.handleBlur("address")}
@@ -287,18 +293,20 @@ const Checkout = () => {
                   {formik.touched.address && formik.errors.address}
                 </div>
               </div>
+
               <div className="w-100">
                 <input
                   type="text"
                   placeholder="Appartment"
-                  className="form-control "
+                  className="w-11/12 rounded-sm p-2 border border-zinc-400 outline-none "
                 />
               </div>
+
               <div className="flex-grow-1">
                 <input
                   type="text"
                   placeholder="City"
-                  className="form-control "
+                  className="w-11/12 rounded-sm p-2 border border-zinc-400 outline-none"
                   value={formik.values.city}
                   onChange={formik.handleChange("city")}
                   onBlur={formik.handleBlur("city")}
@@ -307,6 +315,7 @@ const Checkout = () => {
                   {formik.touched.city && formik.errors.city}
                 </div>
               </div>
+
               <div className="w-100">
                 <select
                   name="state"
@@ -314,7 +323,7 @@ const Checkout = () => {
                   onChange={formik.handleChange("state")}
                   onBlur={formik.handleBlur("state")}
                   id=""
-                  className="form-control form-select"
+                  className="w-11/12 rounded-sm p-2 border border-zinc-400 outline-none"
                 >
                   <option value={"Select State"} selected>
                     Select State
@@ -326,11 +335,12 @@ const Checkout = () => {
                   {formik.touched.state && formik.errors.state}
                 </div>
               </div>
+
               <div className="flex-grow-1">
                 <input
                   type="text"
                   placeholder="ZipCode"
-                  className="form-control"
+                  className="w-11/12 rounded-sm p-2 border border-zinc-400 outline-none"
                   value={formik.values.pincode}
                   onChange={formik.handleChange("pincode")}
                   onBlur={formik.handleBlur("pincode")}
@@ -339,55 +349,69 @@ const Checkout = () => {
                   {formik.touched.pincode && formik.errors.pincode}
                 </div>
               </div>
-              <div className="w-100">
-                <div className="d-flex justify-content-between align-items-center ">
-                  <Link to="/cart" className="text-dark">
-                    <BiArrowBack className="me-2" />
-                    Return to Cart
-                  </Link>
-                  <Link to="/cart" className="button bg-danger">
+
+              <div className="w-11/12 flex justify-between items-center center mt-4 max-sm:flex-col max-sm:items-start max-sm:hidden">
+                <Link
+                  to="/cart"
+                  className="text-dark flex items-center gap-1 mt-[-20px] max-sm:mb-4"
+                >
+                  <BiArrowBack className="me-2" />
+                  Return to Cart
+                </Link>
+
+                <div className="flex gap-5">
+                  <Link
+                    to="/cart"
+                    className="rounded-3xl text-sm font-medium bg-blue text-white py-3 px-6 text-center  mb-7 hover:bg-yellow hover:text-black max-sm:px-4 "
+                  >
                     Continue to Shipping
                   </Link>
-                  <button className="button " type="submit">
+
+                  <button
+                    className="rounded-3xl font-medium text-sm bg-blue text-white py-3 px-6 text-center  mb-7 hover:bg-yellow hover:text-black "
+                    type="submit"
+                  >
                     Place Order
                   </button>
                 </div>
               </div>
             </form>
           </div>
-          <div className="col-5">
-            <div className="border-bottom   py-4">
+
+          <div className="w-2/5 max-sm:w-full">
+
+            <div className="flex flex-col items-center justify-center border-b  border-zinc-400 py-4 gap-5">
               {cart.myCart &&
                 cart.myCart.map((cart, index) => {
                   return (
                     <div
                       key={index}
-                      className="d-flex gap-10 mb-2 align-items-center"
+                      className="flex justify-center gap-8 mb-8  "
                     >
-                      <div className="d-flex w-75 align-items-center gap-10">
-                        <div className="w-25 position-relative">
+                      <div className="flex justify-center items-center gap-4  ">
+                        <div className=" relative object-contain  w-40">
                           <span
-                            className="badge bg-secondary text-white rounded-circle p-2 position-absolute"
-                            style={{ top: "-10px", right: "2px" }}
+                            className="bg-neutral-500 text-white rounded-full px-2 py-1 text-xs absolute right-1 
+                            top-[-12px]"
                           >
                             {cart.quantity}
                           </span>
+
                           <img
                             src={cart.productId.images[0]?.image}
-                            width={100}
-                            height={100}
+                            className="w-80  bg-white"
                             alt=""
                           />
                         </div>
+
                         <div>
-                          <h5 className="total-price">
-                            {cart.productId.title}{" "}
-                          </h5>
-                          <p className="total-price">{cart.color.title} </p>
+                          <h5 className="text-sm">{cart.productId.title} </h5>
+                          <p className="text-sm">{cart.color.title} </p>
                         </div>
                       </div>
-                      <div className="flex-grow-1">
-                        <h5 className="total">
+
+                      <div className="w-[30%] ">
+                        <h5 className="text-sm">
                           $ {cart.price * cart.quantity}
                         </h5>
                       </div>
@@ -396,14 +420,14 @@ const Checkout = () => {
                 })}
             </div>
 
-            <div className="border-bottom py-4">
-              <div className="d-flex justify-content-between align-items-center">
+            <div className="border-b  border-zinc-400 py-4">
+              <div className="flex justify-between items-center mb-6">
                 <p className="total">Subtotal</p>
                 <p className="total-price">
                   $ {totalAmount ? totalAmount : "0"}
                 </p>
               </div>
-              <div className="d-flex justify-content-between align-items-center">
+              <div className="flex justify-between items-center">
                 <p className="total">Shipping</p>
 
                 <p className="total-price">
@@ -411,10 +435,39 @@ const Checkout = () => {
                 </p>
               </div>
             </div>
-            <div className="d-flex justify-content-between align-items-center py-4">
+
+            <div className="flex justify-between items-center py-4">
               <h4 className="total">Total</h4>
               <h5 className="total-price">$ {totalAmount ? totalAmount : 0}</h5>
             </div>
+
+            <div className="w-11/12 flex justify-between items-center center mt-4 max-sm:flex-col max-sm:items-start 
+            min-[600px]:hidden max-sm:mt-8 max-sm:w-full">
+              <Link
+                to="/cart"
+                className="text-dark flex items-center gap-1 mt-[-20px] max-sm:mb-4"
+              >
+                <BiArrowBack className="me-2" />
+                Return to Cart
+              </Link>
+
+              <div className="flex gap-5">
+                <Link
+                  to="/cart"
+                  className="rounded-3xl text-sm font-medium bg-blue text-white py-3 px-6 text-center  mb-7 hover:bg-yellow hover:text-black max-sm:px-4 "
+                >
+                  Continue to Shipping
+                </Link>
+
+                <button
+                  className="rounded-3xl font-medium text-sm bg-blue text-white py-3 px-6 text-center  mb-7 hover:bg-yellow hover:text-black "
+                  type="submit"
+                >
+                  Place Order
+                </button>
+              </div>
+            </div>
+
           </div>
         </div>
       </Container>

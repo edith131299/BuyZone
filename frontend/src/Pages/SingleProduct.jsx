@@ -15,6 +15,7 @@ import {
 import { addToCart, getUserCart } from "../features/User/userSlice";
 import { toast } from "react-toastify";
 import Loader from "./Utils/loader";
+import Container from "../components/Container";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -51,14 +52,13 @@ const SingleProduct = () => {
   };
 
   const addCart = () => {
-    if (!user._id) {
-      alert("Please login to add product to cart");
+    if (!user) {
+      toast.error("Please login to add product to cart");
       return navigate("/login");
     }
 
-
     if (color === null) {
-      return alert("Please Set the Color");
+      return toast.error("Please Set the Color");
     }
 
     dispatch(addToCart(cart));
@@ -140,40 +140,46 @@ const SingleProduct = () => {
   }, []);
 
   return (
-    <fragment>
+    <>
       <BreadCrumb title={"Product Details "} />
-
-      {isLoading ? (
-        <Loader />
-      ) : (
-        product&&
-        <fragment>
-          <div className="main-product-wrapper py-5 home-wrapper-2">
-            <div className="container-xxl">
-              <div className="row">
-                <div className="col-6">
-                  <div className="main-product-image">
-                    <div>
-                     
-                        <Zoom
-                          img={`${product?.images[0].image}`}
-                          zoomScale={2}
-                          width={600}
-                          height={600}
-                          className=""
-                          style={{}}
-                        />
-                    
-                    </div>
+      <Container class1="py-4 max-sm:mx-4">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          product && (
+            <fragment>
+              <section className="main-product-wrapper py-5 flex gap-4 max-sm:flex-col ">
+                <div className="rounded-lg w-1/2 bg-white py-4 px-3 max-sm:w-full">
+                  <div className="border mb-6 border-zinc-400  ">
+                    <Zoom
+                      img={`${product?.images[0].image}`}
+                      zoomScale={2}
+                      width={500}
+                      height={500}
+                      className="w-full p-4 max-sm:hidden"
+                      style={{}}
+                    />
+                    <Zoom
+                      img={`${product?.images[0].image}`}
+                      zoomScale={2}
+                      width={300}
+                      height={300}
+                      className=" max-sm:w-1/5 hidden max-sm:block"
+                      style={{}}
+                    />
                   </div>
-                  <div className="other-product-image d-flex flex-wrap gap-15">
+
+                  <div className=" other-product-image flex justify-center flex-wrap w-full gap-3">
                     {product &&
                       product?.images.map((image, index) => {
                         return (
-                          <div key={index}>
+                          <div
+                            className="border border-zinc-400 w-[45%] flex items-center justify-center p-5"
+                            key={index}
+                          >
                             <img
                               src={image.image}
-                              className="img-fluid"
+                              className="img-fluid object-contain"
                               alt=""
                             />
                           </div>
@@ -181,14 +187,174 @@ const SingleProduct = () => {
                       })}
                   </div>
                 </div>
-                <div className="col-6">
-                  <div className="main-product-details">
-                    <div className="border-bottom">
-                      <h3 className="title">{product?.title}</h3>
+
+                <div className="rounded-lg w-1/2 bg-white py-6 px-5 max-sm:w-full ">
+                  <div className="border-b">
+                    <h3 className="text-sm font-medium mb-5 ">
+                      {product?.title}
+                    </h3>
+                  </div>
+
+                  <div className="border-b py-5">
+                    <p className="price">${product?.price}</p>
+                    <div className="flex items-center gap-5">
+                      <ReactStars
+                        count={5}
+                        size={24}
+                        activeColor="#ffd700"
+                        value={Number(product?.totalrating)}
+                        edit={false}
+                      />
+                      <p className="mb-0 text-[#777] text-sm">
+                        {Number(product?.ratings.length)} Reviews
+                      </p>
                     </div>
-                    <div className="border-bottom py-3">
-                      <p className="price">${product?.price}</p>
-                      <div className="d-flex align-items-center gap-10">
+                    <a
+                      className="review-btn text-[#777] text-sm"
+                      href="#review"
+                    >
+                      Write a Review
+                    </a>
+                  </div>
+
+                  <div className="border-b flex flex-col gap-7  py-3">
+                    <div className="flex gap-3 items-center ">
+                      <h3 className="text-md text-black font-medium">Type:</h3>
+                      <p className="text-sm">{product?.category}</p>
+                    </div>
+                    <div className="flex gap-3 items-center ">
+                      <h3 className="text-md text-black font-medium">Brand:</h3>
+                      <p className="text-sm">{product?.brand}</p>
+                    </div>
+                    <div className="flex gap-3 items-center ">
+                      <h3 className="text-md text-black font-medium">
+                        Category:
+                      </h3>
+                      <p className="text-sm">{product?.category}</p>
+                    </div>
+                    <div className="flex gap-3 items-center">
+                      <h3 className="text-md text-black font-medium">Tags:</h3>
+                      <p className="text-sm">{product?.tags}</p>
+                    </div>
+                    <div className="flex gap-3 items-center">
+                      <h3 className="text-md text-black font-medium">
+                        Availability:
+                      </h3>
+                      <p className="text-sm">
+                        {product?.quantity > 0 ? "In Stock" : "Out Of Stock"}
+                      </p>
+                    </div>
+
+                    <div className="flex gap-3 items-center">
+                      <h3 className="text-md text-black font-medium">Color:</h3>
+                      <Colors setColor={setColor} color={product?.color} />
+                    </div>
+
+                    <div className="flex gap-5 items-center flex-row">
+                      <h3 className="text-md text-black font-medium">
+                        Quantity:
+                      </h3>
+
+                      <div>
+                        <input
+                          type="number"
+                          min={1}
+                          max={product?.quantity}
+                          name=""
+                          className="border outline-none h-9 w-12 pl-3 ms-2 "
+                          id=""
+                          onChange={(e) => setQuantity(e.target.value)}
+                          value={quantity}
+                        />
+                      </div>
+                      <div className="text-sm rounded-3xl font-medium bg-blue text-white py-3 px-4 text-center  hover:bg-yellow hover:text-black  ms-3">
+                        {alreadyAdded ? (
+                          <button
+                            className=""
+                            onClick={() => navigate("/cart")}
+                            disabled={product?.quantity < 0}
+                          >
+                            Go To Cart
+                          </button>
+                        ) : (
+                          <button
+                            className=""
+                            onClick={() => addCart()}
+                            disabled={Boolean(product?.quantity < 0)}
+                          >
+                            {product?.quantity < 0
+                              ? "Notify Me"
+                              : "Add to Cart"}
+                          </button>
+                        )}
+
+                        {/*   <button className="button signup border-0">
+                       Buy Now 
+                      </button> */}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center ">
+                      <button
+                        className="border-0 flex items-center  bg-transparent"
+                        onClick={() => {
+                          addToWish(product._id);
+                        }}
+                      >
+                        <img
+                          className="me-2"
+                          src="/images/wish.svg"
+                          alt="wishlist"
+                        />
+                        Add to WishList
+                      </button>
+                    </div>
+
+                    <div className="flex flex-col gap-3 my-4  ">
+                      <h3 className="text-md font-medium">
+                        Shipping &Returns :
+                      </h3>
+                      <p className="text-sm">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing
+                        elit. Reiciendis veniam hic aut dignissimos temporibus,
+                        aliquid iusto asperiores deleniti magni odit cupiditate
+                        minus in sint voluptate, nulla incidunt error numquam!
+                        Voluptatem?
+                      </p>
+                    </div>
+
+                    <div className="flex gap-3 items-center mb-6  ">
+                      <h3 className="text-md font-medium"> Product Link:</h3>
+                      <a
+                        href="#!"
+                        onClick={() => {
+                          copyToClipboard(window.location.href);
+                        }}
+                      >
+                        copy product link
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section className="description-wrapper py-5 home-wrapper-2">
+                <h4 className="text-3xl font-medium my-4">Description</h4>
+                <div className="bg-white p-4 text-md text-[#777] text-justify pb-8">
+                  <p>{product?.description}</p>
+                </div>
+              </section>
+
+              <section id="review" className="reviews-wrapper  home-wrapper-2">
+                <h4 className="text-3xl font-medium my-4">Reviews</h4>
+
+                <div className="bg-white py-6 px-4">
+                  <div className="border-b border-black">
+                    <h4 className="text-lg font-medium mb-5">
+                      Customer Review
+                    </h4>
+                    {product && (
+                      <div className="flex items-center gap-5 mb-10">
                         <ReactStars
                           count={5}
                           size={24}
@@ -196,241 +362,93 @@ const SingleProduct = () => {
                           value={Number(product?.totalrating)}
                           edit={false}
                         />
-                        <p className="mb-0 t-review">
-                          {Number(product?.ratings.length)} Reviews
+                        <p className="text-[#777] ">
+                          Based on {product?.ratings.length} Reviews
                         </p>
                       </div>
-                      <a className="review-btn" href="#review">
-                        Write a Review
-                      </a>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col gap-2 py-6 border-b border-black ">
+                    <h4 className="text-[#777] mb-2 font-medium">
+                      Write A Review
+                    </h4>
+
+                    <div>
+                      <ReactStars
+                        count={5}
+                        size={24}
+                        activeColor="#ffd700"
+                        value={rating}
+                        edit={true}
+                        onChange={(e) => setRating(e)}
+                      />
                     </div>
-                    <div className="boder-bottom row gap-30  py-3">
-                      <div className="d-flex gap-10 align-items-center ">
-                        <h3 className="product-heading">Type:</h3>
-                        <p className="product-data">{product?.category}</p>
-                      </div>
-                      <div className="d-flex gap-10 align-items-center ">
-                        <h3 className="product-heading">Brand:</h3>
-                        <p className="product-data">{product?.brand}</p>
-                      </div>
-                      <div className="d-flex gap-10 align-items-center ">
-                        <h3 className="product-heading">Category:</h3>
-                        <p className="product-data">{product?.category}</p>
-                      </div>
-                      <div className="d-flex gap-10 align-items-center">
-                        <h3 className="product-heading">Tags:</h3>
-                        <p className="product-data">{product?.tags}</p>
-                      </div>
-                      <div className="d-flex gap-10 align-items-center">
-                        <h3 className="product-heading">Availability:</h3>
-                        <p className="product-data">
-                          {product?.quantity>0?"In Stock":"Out Of Stock"} 
-                        </p>
-                      </div>
 
-                      <div className="d-flex gap-10 flex-column">
-                        <h3 className="product-heading">Color:</h3>
-                        <Colors setColor={setColor} color={product?.color} />
-                      </div>
-                      <div className="d-flex gap-10 align-items-center flex-row">
-                        <h3 className="product-heading">Quantity:</h3>
+                    <div>
+                      <textarea
+                        name=""
+                        className="w-full border p-2 border-black outline-none rounded-md  mt-2"
+                        id=""
+                        cols="30"
+                        rows="4"
+                        value={comment}
+                        placeholder="Write Review here"
+                        onChange={(e) => setComment(e.target.value)}
+                      ></textarea>
+                    </div>
 
-                        <div>
-                          <input
-                            type="number"
-                            min={1}
-                            max={product?.quantity}
-                            name=""
-                            className="form-control ms-4"
-                            style={{ width: "70px" }}
-                            id=""
-                            onChange={(e) => setQuantity(e.target.value)}
-                            value={quantity}
-                          />
-                        </div>
-                        <div className="d-flex align-items-cente gap-30 ms-3">
-                          {alreadyAdded ? (
-                            <button
-                              className="button border-0"
-                              onClick={() => navigate("/cart")}
-                              disabled={product?.quantity<0}
-                            >
-                              Go To Cart
-                            </button>
-                          ) : (
-                            <button
-                              className="button border-0"
-                              onClick={() => addCart()}
-                              disabled={Boolean(product?.quantity<0)}
-                            >
-                              {product?.quantity<0?"Notify Me":"Add to Cart"}
-                           
-                            </button>
-                          )}
-
-                          {/*   <button className="button signup border-0">
-                       Buy Now 
-                      </button> */}
-                        </div>
-                      </div>
-                      <div className="d-flex align-items-center gap-15">
-                        <div>
-                          <button
-                            className="border-0  bg-transparent"
-                            onClick={() => {
-                              addToWish(product._id);
-                            }}
-                          >
-                            <img
-                              className="me-2"
-                              src="/images/wish.svg"
-                              alt="wishlist"
-                            />
-                            Add to WishList
-                          </button>
-                        </div>
-                      </div>
-                      <div className="d-flex flex-column gap-10  ">
-                        <h3 className="product-heading">Shipping &Returns :</h3>
-                        <p className="product-data">
-                          Lorem ipsum dolor sit amet consectetur, adipisicing
-                          elit. Reiciendis veniam hic aut dignissimos
-                          temporibus, aliquid iusto asperiores deleniti magni
-                          odit cupiditate minus in sint voluptate, nulla
-                          incidunt error numquam! Voluptatem?
-                        </p>
-                      </div>
-                      <div className="d-flex gap-10 align-items-center   ">
-                        <h3 className="product-heading"> Product Link</h3>
-                        <a
-                          href="#!"
-                          onClick={() => {
-                            copyToClipboard(window.location.href);
-                          }}
-                        >
-                          copy product link
-                        </a>
-                      </div>
+                    <div className="flex justify-end">
+                      <button
+                        onClick={submitRating}
+                        className="text-md rounded-3xl font-medium bg-blue text-white py-2 px-4 text-center  mb-2 hover:bg-yellow hover:text-black mt-4"
+                        type="button"
+                      >
+                        Submit Review
+                      </button>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="description-wrapper py-5 home-wrapper-2">
-            <div className="container-xxl">
-              <div className="row">
-                <div className="col-12">
-                  <h4>Description</h4>
-                  <div className="bg-white p-3">
-                    <p>{product?.description}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <section id="review" className="reviews-wrapper  home-wrapper-2">
-            <div className="container-xxl">
-              <div className="row">
-                <div className="col-12">
-                  <h3>Reviews</h3>
-                  <div className="review-inner-wrapper">
-                    <div className="review-head d-flex justify-content-between align-items-end py-4">
-                      <div>
-                        <h4 className="mb-3">Customer Review</h4>
-                        {product && (
-                          <div className="d-flex align-items-center gap-10">
+
+                  {product &&
+                    product.ratings.map((rating, index) => {
+                      return (
+                        <div key={index} className="reviews mt-4">
+                          <div className="">
+                            <h6 className="mb-0">
+                              {rating.postedBy.firstName}
+                            </h6>
                             <ReactStars
                               count={5}
                               size={24}
                               activeColor="#ffd700"
-                              value={Number(product?.totalrating)}
+                              value={Number(rating.star)}
                               edit={false}
                             />
-                            <p className="mb-0">
-                              Based on {product?.ratings.length} Reviews
-                            </p>
                           </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="review-form py-4">
-                      <h4>Write A Review</h4>
 
-                      <div>
-                        <ReactStars
-                          count={5}
-                          size={24}
-                          activeColor="#ffd700"
-                          value={rating}
-                          edit={true}
-                          onChange={(e) => setRating(e)}
-                        />
-                      </div>
+                          <p className="mt-3">{rating.comment}</p>
+                        </div>
+                      );
+                    })}
+                </div>
+              </section>
 
-                      <div>
-                        <textarea
-                          name=""
-                          className="w-100  form-control"
-                          id=""
-                          cols="30"
-                          rows="4"
-                          value={comment}
-                          placeholder="Write Review here"
-                          onChange={(e) => setComment(e.target.value)}
-                        ></textarea>
-                      </div>
-                      <div className="d-flex justify-content-end">
-                        <button
-                          onClick={submitRating}
-                          className="button border-0 mt-2"
-                          type="button"
-                        >
-                          Submit Review
-                        </button>
-                      </div>
-                    </div>
-                    {product &&
-                      product.ratings.map((rating, index) => {
-                        return (
-                          <div key={index} className="reviews mt-4">
-                            <div className="review ">
-                              <div className="dflex gap-10 align-items-center ">
-                                <h6 className="mb-0">
-                                  {rating.postedBy.firstName}
-                                </h6>
-                                <ReactStars
-                                  count={5}
-                                  size={24}
-                                  activeColor="#ffd700"
-                                  value={Number(rating.star)}
-                                  edit={false}
-                                />
-                              </div>
+              <section className="popular-wrapper py-5 home-wrapper-2">
+                <div className="container-xxl">
+                  <div className="w-3/4 max-sm:w-full">
+                    <h4 className="text-3xl font-medium my-4">
+                      Our Popular Products
+                    </h4>
 
-                              <p className="mt-3">{rating.comment}</p>
-                            </div>
-                          </div>
-                        );
-                      })}
+                    <ProductCard data={popularPrd} />
                   </div>
                 </div>
-              </div>
-            </div>
-          </section>
-          <section className="popular-wrapper py-5 home-wrapper-2">
-            <div className="container-xxl">
-              <div className="row">
-                <div className="col-12">
-                  <h3 className="section-heading">Our Popular Products</h3>
-                </div>
-                <ProductCard data={popularPrd} />
-              </div>
-            </div>
-          </section>
-        </fragment>
-      )}
-    </fragment>
+              </section>
+            </fragment>
+          )
+        )}
+      </Container>
+    </>
   );
 };
 

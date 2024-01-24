@@ -4,58 +4,64 @@ import { Link } from "react-router-dom";
 import Container from "./Container";
 
 const Footer = () => (
-  <>
-    <footer className="py-4">
-      <div className="container-xxl ">
-        <div className="row align-items-center">
-          <div className="col-5">
-            <div className="footer-top-data d-flex gap-30 align-items-center">
+  <section className=" bg-blue">
+
+    <section className="max-w-screen-xl mx-auto flex flex-col max-sm:mx-4">
+    
+    <footer className="py-8 flex items-center justify-between border-b border-grey border-solid max-sm:flex-col max-sm:items-start max-sm:gap-7">
+      
+          <div className="w-2/5 max-sm:w-full max-sm:gap-4 ">
+            <div className="flex gap-5">
               <img src="/images/newsletter.png" alt="newsletter" />
-              <h2>Sign Up For Newsletter</h2>
+              <h2 className="text-white text-4xl font-medium max-sm:text-2xl">Sign Up For Newsletter</h2>
             </div>
           </div>
-          <div className="col-7">
-            <div className="input-group ">
+         
+            <div className="flex w-3/5 max-sm:w-full">
               <input
                 type="text"
-                className="form-control py-1"
+                className="rounded outline-none p-2 w-full "
                 placeholder="Email Address"
                 aria-label="Email Address"
                 aria-describedby="basic-addon2"
               />
-              <span className="input-group-text p-2" id="basic-addon2">
+              <span className="text-white bg-black p-2 border border-solid border-white ml-[-2px] hover:shadow-box-shadow" id="basic-addon2">
                 Subscribe
               </span>
             </div>
-          </div>
-        </div>
-      </div>
+     
     </footer>
-    <footer className="py-4">
-      <div className="container-xxl ">
-        <div className="d-flex row">
-          <div className="col-4 text-white mb-4">
-            <h4>Contact Us</h4>
-            <div className="mt-4">
+
+    <footer className="py-4 max-sm:text-xs">
+     
+        <div className="flex justify-between flex-wrap max-sm:gap-4">
+
+          <div className="  text-white mb-4">
+            <h4 className="text-2xl font-medium mb-8">Contact Us</h4>
+            <div className=" flex flex-col">
+
               <address className="text-white fs-6">
                 No.7,Perumal Kovil Street <br />
                 Pudur,Ambattur,
                 <br />
                 chennai-600053
               </address>
+
               <a
                 href="tel:+91 825689648 "
                 className="mt-3 text-white d-block mb-1"
               >
                 +91 8276573893
               </a>
+
               <a
                 href="mailto: sudakarvenkat023@gmail.com"
                 className="mt-2 d-block text-white mb-0"
               >
-                +91 sudakarvenkat023@gmail.com
+               sudakarvenkat023@gmail.com
               </a>
-              <div className="social-icons d-flex align-items-center gap-30 mt-4">
+
+              <div className=" flex items-center gap-7 mt-6">
                 <a className="text-white" href="javascrip">
                   <BsLinkedin className="fs-4" />
                 </a>
@@ -69,11 +75,13 @@ const Footer = () => (
                   <BsGithub className="fs-4" />
                 </a>
               </div>
+
             </div>
           </div>
-          <div className="col-3 text-white mb-4">
-            <h4>Information</h4>
-            <div className="footer-links d-flex flex-column">
+
+          <div className=" text-white mb-4">
+            <h4 className="text-2xl font-medium mb-4">Information</h4>
+            <div className=" flex flex-col  ">
               <Link to={"privacy-policy"} className="text-white py-2 mb-1">
                 Policy
               </Link>
@@ -91,17 +99,19 @@ const Footer = () => (
               </Link>
             </div>
           </div>
-          <div className="col-3 text-white mb-4">
-            <h4>Accounts</h4>
-            <div className="footer-Links d-flex flex-column">
+
+          <div className=" text-white mb-4">
+            <h4 className="text-2xl font-medium mb-4">Accounts</h4>
+            <div className="flex flex-col">
               <Link className="text-white py-2 mb-1">About Us</Link>
               <Link className="text-white py-2 mb-1">FAQ</Link>
               <Link className="text-white py-2 mb-1">Contact</Link>
             </div>
           </div>
-          <div className="col-2 text-white mb-4">
-            <h4>Ouick Links</h4>
-            <div className="footer-links d-flex flex-column">
+
+          <div className=" text-white mb-4">
+            <h4 className="text-2xl font-medium mb-4">Ouick Links</h4>
+            <div className="flex flex-col">
               <Link className="text-white py-2 mb-1">Laptops</Link>
               <Link className="text-white py-2 mb-1">HeadPhones</Link>
               <Link className="text-white py-2 mb-1">Tablets</Link>
@@ -109,8 +119,9 @@ const Footer = () => (
             </div>
           </div>
         </div>
-      </div>
+
     </footer>
+
     <footer className="py-4">
       <div className="container-xxl">
         <div className="row">
@@ -122,7 +133,10 @@ const Footer = () => (
         </div>
       </div>
     </footer>
-  </>
+
+    </section>
+
+  </section>
 );
 
 export default Footer;

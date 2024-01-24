@@ -5,7 +5,7 @@ const CustomInput = (props) => {
     type,
     name,
     placeholder,
-    classname,
+    className,
     value,
     onChange,
     onBlur,
@@ -18,7 +18,7 @@ const CustomInput = (props) => {
         type={type}
         name={name}
         placeholder={placeholder}
-        className={`form-control${classname ? classname : ""}`}
+        className={`bg-grey p-3 rounded-md w-full outline-none ${className ? className : ""}`}
         value={value}
         onChange={onChange}
         onBlur={onBlur}

@@ -25,3 +25,73 @@ export const services = [
     tagline: "100% Protected Payment",
   },
 ];
+
+export const collection = [
+  {
+    name: "Camera",
+    count: "10 Items",
+    image: "/images/camera.jpg",
+  },
+  {
+    name: "Tv",
+    count: "10 Items",
+    image: "/images/tv.jpg",
+  },
+  {
+    name: "Laptop",
+    count: "10 Items",
+    image: "/images/laptop.jpg",
+  },
+  {
+    name: "Headphone",
+    count: "10 Items",
+    image: "/images/headphone.jpg",
+  },
+  {
+    name: "Camera",
+    count: "10 Items",
+    image: "/images/camera.jpg",
+  },
+  {
+    name: "Tv",
+    count: "10 Items",
+    image: "/images/tv.jpg",
+  },
+  {
+    name: "Laptop",
+    count: "10 Items",
+    image: "/images/laptop.jpg",
+  },
+  {
+    name: "Headphone",
+    count: "10 Items",
+    image: "/images/headphone.jpg",
+  },
+];
+
+export const famousCard = [
+  {
+    h5: "Big Screen",
+    h6: "Smart Watch Series 7",
+    p: "From $399 or $16.62/mo. for 24 mo.",
+    image: "/images/catbanner-01.jpg",
+  },
+  {
+    h5: "Big Screen",
+    h6: "Smart Watch Series 7",
+    p: "From $399 or $16.62/mo. for 24 mo.",
+    image: "/images/catbanner-01.jpg",
+  },
+  {
+    h5: "Big Screen",
+    h6: "Smart Watch Series 7",
+    p: "From $399 or $16.62/mo. for 24",
+    image: "/images/catbanner-01.jpg",
+  },
+  {
+    h5: "Big Screen",
+    h6: "Smart Watch Series 7",
+    p: "From $399 or $16.62/mo. for 24",
+    image: "/images/catbanner-01.jpg",
+  },
+];

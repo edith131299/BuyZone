@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Dropdown, Image } from "react-bootstrap";
+import "react-bootstrap-typeahead/css/Typeahead.css";
+
+import Menu, { Item as MenuItem, Divider } from "rc-menu";
+import "rc-dropdown/assets/index.css";
 import { BsSearch } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserCart, logoutUser } from "../features/User/userSlice";
-import { Dropdown, Image } from "react-bootstrap";
-import { Typeahead } from "react-bootstrap-typeahead";
-import "react-bootstrap-typeahead/css/Typeahead.css";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { getAllProducts } from "../features/Product/productSlice";
+import { getUserCart, logoutUser } from "../features/User/userSlice";
+import OurStore from "../Pages/OurStore";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -15,22 +18,18 @@ const Header = () => {
 
   const myCart = useSelector((state) => state.authState?.myCart);
 
-  const { products } = useSelector((state) => state?.productState?.products);
-
   const { user } = useSelector((state) => state.authState.user);
 
   const [total, setTotal] = useState(0);
 
   const [orderLength, setOrderLength] = useState(0);
 
-  const [paginate, setPaginate] = useState(true);
-
   const [search, setSearch] = useState(null);
 
-  const searchEvent = () => {
-    console.log(search)
-    dispatch(getAllProducts({ search }));
-    navigate(`/products`);
+  const searchEvent = (e) => {
+    e.preventDefault();
+    
+    navigate(`/products?search=${search}`);
   };
 
   const totalPrice = () => {
@@ -68,182 +67,147 @@ const Header = () => {
   //     });
   // }, [products]);
 
+  // const menu = (
+  //   <Menu className="bg-black outline-none ">
+  //     <MenuItem  key="1" onClick={() => navigate("/myprofile")} >Profile</MenuItem>
+
+  //     <MenuItem key="2" onClick={() => logoutHandler()}>Logout</MenuItem>
+  //   </Menu>
+  // );
+
   return (
     <>
-      <header className="header-top-strip py-3">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-6">
-              <p className="text-white mb-0">
-                Free Shipping Over $100 & Free Return
-              </p>
-            </div>
-            <div className="col-6">
-              <p className="text-end text-white mb-0">
-                Hotline:
-                <Link className="text-white" href="tel:+91 91384857592">
-                  +91 91384857592
-                </Link>
-              </p>
-            </div>
-          </div>
-        </div>
-      </header>
-      <header className=" header-upper py-3">
-        <div className="container-xxl">
-          <div className="row align-center">
-            <div className="col-2">
-              <h2>
-                <Link to="/" className="text-white">
-                  Buy Zone{" "}
-                </Link>
-              </h2>
-            </div>
-            <div className="col-5 ">
-              <form onSubmit={searchEvent} className="input-group ">
-                <input
-                  type="text"
-                  className="form-control py-2"
-                  placeholder="Search Product"
-                  aria-label="Search Product"
-                  aria-describedby="basic-addon2"
-                  onChange={(e) => setSearch(e.target.value)}
-                />
-                <button
-                  type="submit"
-                  className="input-group-text p-3"
-                  id="basic-addon2"
-                >
-                  <BsSearch className="fs-6" />
-                </button>
-              </form>
-            </div>
-            <div className="col-5  ">
-              <div className="header-upper-links d-flex ms-5  align-items-center gap-4">
-                <div>
-                  <Link
-                    to={"wishlist"}
-                    className="d-flex align-items-center gap-10 text-white"
-                  >
-                    <img src="/images/wishlist.svg" alt="wishlist" />
-                    <p className="mb-0">
-                      Favourite <br /> wishlist{" "}
-                    </p>
-                  </Link>
-                </div>
-                <div>
-                  <div className="d-flex align-items-center gap-10 text-white">
-                    {user ? (
-                      <Dropdown>
-                        <Dropdown.Toggle
-                          variant="default text-white px-2 i"
-                          id="dropdown-basic"
-                          className="d-flex align-items-center"
-                        >
-                          <figure className="avatar pt-2 avatar-nav">
-                            <Image
-                              className=" "
-                              width="50px"
-                              src={user.avatar}
-                            ></Image>
-                          </figure>
+      <header className=" bg-slate-900 py-4 border-b border-grey border-solid max-sm:hidden ">
+        <div className="max-w-screen-xl mx-auto flex items-center justify-between">
+          <p className="text-white ">Free Shipping Over $100 & Free Return</p>
 
-                          <p className="mb-0 mt-1 mx-2">
-                            Welcome
-                            <br /> {user.firstName}
-                          </p>
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                          <Dropdown.Item
-                            className="text-dark"
-                            onClick={() => navigate("/myprofile")}
-                          >
-                            Profile
-                          </Dropdown.Item>
-                          <Dropdown.Item
-                            onClick={() => logoutHandler()}
-                            className="text-danger"
-                          >
-                            Logout
-                          </Dropdown.Item>
-                        </Dropdown.Menu>
-                      </Dropdown>
-                    ) : (
-                      <Link to={"/Login"}>
-                        <p className="text-white mb-0 mt-1 mx-2">
-                          Log in <br /> My Account
-                        </p>
-                      </Link>
-                    )}
-                  </div>
-                </div>
-                <div>
-                  <Link
-                    to={"cart"}
-                    className="d-flex align-items-center gap-10 text-white"
+          <p className="text-end text-white   ">
+            Hotline:
+            <Link className="text-white" href="tel:+91 91384857592">
+              +91 91384857592
+            </Link>
+          </p>
+        </div>
+      </header>
+
+      <header className=" bg-slate-900 py-5">
+        <div className="max-w-screen-xl mx-auto flex items-center justify-between max-sm:flex-col max-sm:gap-7  max-sm:items-center max-sm:mx-6">
+          <h2 className="text-white text-4xl font-medium  max-sm:hidden">
+            <Link to="/">Buy Zone </Link>
+          </h2>
+
+          <div className=" max-sm:w-full">
+            <form
+              onSubmit={searchEvent}
+              className="flex items-center w-[500px] max-sm:w-full "
+            >
+              <input
+                type="text"
+                className="flex-1  py-2 px-2 h-12 outline-none rounded border-b border-solid border-[#ced4da]  rounded-tr-none rounded-br-none shadow max-sm:h-10 "
+                placeholder="Search Product"
+                aria-label="Search Product"
+                aria-describedby="basic-addon2"
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <button
+                type="submit"
+                className="bg-yellow h-12 p-3 rounded ml-[-1] rounded-tl-none rounded-bl-none w-12 flex items-center max-sm:h-10"
+                id="basic-addon2"
+              >
+                <BsSearch className="fs-6" />
+              </button>
+            </form>
+          </div>
+
+          <div className=" flex text-lg justify-start gap-8  text-white items-center  max-sm:w-auto max-sm:text-sm max-sm:gap-3 ">
+            <Link
+              to={"wishlist"}
+              className="flex gap-4  items-center justify-center max-sm:gap-3"
+            >
+              <img
+                src="/images/wishlist.svg"
+                alt="wishlist"
+                className="max-sm:h-8"
+              />
+              <p>Wishlist </p>
+            </Link>
+
+            <div className="">
+              {user ? (
+                <Dropdown>
+                  <Dropdown.Toggle
+                    variant="default text-white px-2 i"
+                    id="dropdown-basic"
+                    className="flex items-center"
                   >
-                    <img src="/images/cart.svg" alt="cart" />
-                    <div className="d-flex flex-column gap-10">
-                      <span className="badge bg-white text-dark">
-                        {orderLength}
-                      </span>
-                      <p className="mb-0">$ {total}</p>
-                    </div>
-                  </Link>
-                </div>
-              </div>
+                    <figure className="avatar pt-2 avatar-nav">
+                      <Image
+                        className=" "
+                        width="30px"
+                        src={user.avatar}
+                      ></Image>
+                    </figure>
+
+                    <p className="mb-0 mt-1 mx-2">
+                      Welcome
+                      <br /> {user.firstName}
+                    </p>
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu className="bg-white flex flex-col">
+                    <Dropdown.Item
+                      className="text-black"
+                      onClick={() => navigate("/myprofile")}
+                    >
+                      Profile
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      onClick={() => logoutHandler()}
+                      className="text-red-600"
+                    >
+                      Logout
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              ) : (
+                <Link to={"/Login"}>
+                  <p className="text-white mb-0 mt-1 mx-2">
+                    Log in <br />
+                    My Account
+                  </p>
+                </Link>
+              )}
             </div>
+
+            <Link
+              to={"cart"}
+              className="flex justify-center items-center gap-2 "
+            >
+              <img src="/images/cart.svg" alt="cart" />
+              <div className="flex flex-col gap-1  ">
+                <span className=" rounded-lg bg-white text-black text-center px-1 text-sm font-medium max-sm:text-xs max-sm:px-0 ">
+                  {orderLength}
+                </span>
+                <p className="mb-0">$ {total}</p>
+              </div>
+            </Link>
           </div>
         </div>
       </header>
-      <header className="header-bottom py-3 ">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <div className="menu-bottom d-flex align-items-center gap-30">
-                <div className="dropdown">
-                  <button
-                    className="btn btn-secondary dropdown-toggle bg-transparent border-0 gap-15 d-flex align-items-center"
-                    type="button"
-                    id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <img src="/images/menu.svg" alt="menu" />
-                    <span className="me-5 d-inline-block">Shop categories</span>
-                  </button>
-                  <ul
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton1"
-                  >
-                    <li>
-                      <Link className="dropdown-item text-white" to="">
-                        Action
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item text-white" to="">
-                        Another action
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="dropdown-item text-white" to="">
-                        Something else here
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-                <div className="menu-links">
-                  <div className="d-flex align-items-center  gap-15">
-                    <NavLink to={"/"}>Home</NavLink>
-                    <NavLink to={`/products`}>Our Store</NavLink>
-                    <NavLink to={"/my-orders"}>My Orders</NavLink>
-                    <NavLink to={"/blogs"}>Blogs</NavLink>
-                    <NavLink to={"/contact"}>Contact</NavLink>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+      <header className="bg-blue text-white py-5 ">
+        <div className="max-w-screen-xl mx-auto flex items-center gap-16 justify-start max-sm:w-full max-sm:gap-5">
+          <div className="flex items-center gap-4 max-sm:hidden ">
+            <img src="/images/menu.svg" alt="menu" />
+            <span className="max-sm:block">Shop At Your Ease</span>
+          </div>
+
+          <div className="flex gap-8 max-sm:mx-2 max-sm:text-xs items-center  ">
+            <NavLink to={"/"}>Home</NavLink>
+            <NavLink to={`/products`}>Our Store</NavLink>
+            <NavLink to={"/my-orders"}>My Orders</NavLink>
+            <NavLink to={"/blogs"}>Blogs</NavLink>
+            <NavLink to={"/contact"}>Contact</NavLink>
           </div>
         </div>
       </header>

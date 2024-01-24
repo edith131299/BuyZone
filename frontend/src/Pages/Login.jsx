@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../features/User/userSlice";
 import CustomInput from "../components/CustomInput";
+import Container from "../components/Container";
 
 const userSchema = yup.object({
   email: yup
@@ -44,58 +45,59 @@ const Login = () => {
   return (
     <>
       <BreadCrumb title={"Login"} />
-      <div className="login-wrapper home-wrapper-2 py-5">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <div className="auth-card">
-                <h3 className="text-center mb-3">Login</h3>
-                <form
-                  className="d-flex flex-column gap-15"
-                  action=""
-                  onSubmit={formik.handleSubmit}
-                >
-                  <CustomInput
-                    type="text"
-                    name="email"
-                    placeholder="Email Id"
-                    value={formik.values.email}
-                    onChange={formik.handleChange("email")}
-                    onBlur={formik.handleBlur("email")}
-                  />
-                  <div className="error">
-                    {formik.touched.email && formik.errors.email}
-                  </div>
-
-                  <CustomInput
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange("password")}
-                    onBlur={formik.handleBlur("password")}
-                  />
-
-                  <div className="error">
-                    {formik.touched.password && formik.errors.password}
-                  </div>
-                  <div className="mt-3 ms-3">
-                    <Link to="/forgot-password">Forgot Password</Link>
-                  </div>
-                  <div className="d-flex mt-3 justify-content-center gap-15 align-items-center">
-                    <button type="submit" className="button border-0">
-                      Login
-                    </button>
-                    <Link to="/signup" className="button signup">
-                      SignUp
-                    </Link>
-                  </div>
-                </form>
-              </div>
+      <Container class1=" mt-12 py-5 flex justify-center mb-10 ">
+        <div className="bg-white w-[500px]  rounded-lg p-3 px-6 max-sm:w-[320px] max-sm:text-xs  ">
+          <h3 className="text-center  p-4  font-medium text-[#777]   ">
+            Login
+          </h3>
+          <form
+            className="flex flex-col gap-4"
+            action=""
+            onSubmit={formik.handleSubmit}
+          >
+            <CustomInput
+              type="text"
+              name="email"
+              placeholder="Email Id"
+              value={formik.values.email}
+              onChange={formik.handleChange("email")}
+              onBlur={formik.handleBlur("email")}
+            />
+            <div className="error">
+              {formik.touched.email && formik.errors.email}
             </div>
-          </div>
+
+            <CustomInput
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formik.values.password}
+              onChange={formik.handleChange("password")}
+              onBlur={formik.handleBlur("password")}
+            />
+
+            <div className="error">
+              {formik.touched.password && formik.errors.password}
+            </div>
+
+            <Link
+              className="mt-2 text-[#1c1c1b] font-normal text-sm"
+              to="/forgot-password"
+            >
+              Forgot Password
+            </Link>
+
+            <div className="flex mt-3 justify-center items-center gap-5 text-sm max-sm:text-xs">
+              <button type="submit" className="rounded-3xl font-medium bg-blue text-white py-3 px-6 text-center  mb-7 hover:bg-yellow hover:text-black">
+                Login
+              </button>
+              <Link to="/signup" className="rounded-3xl font-normal bg-yellow text-black py-3 px-6 text-center  mb-7 hover:bg-blue hover:text-white">
+                SignUp
+              </Link>
+            </div>
+          </form>
         </div>
-      </div>
+      </Container>
     </>
   );
 };

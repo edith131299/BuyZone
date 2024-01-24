@@ -5,7 +5,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-import "./App.css";
+import "./App.css"
+
 import { routes } from "./routes";
 import { getMyProfile } from "./features/User/userSlice";
 
@@ -17,7 +18,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getMyProfile());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <HelmetProvider>

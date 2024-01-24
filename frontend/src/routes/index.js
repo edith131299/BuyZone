@@ -103,11 +103,7 @@ export const routes = [
   },
   {
     path: "/user/resetpassword/:token",
-    element: (
-      <PrivateRoute>
-        <ResetPassword />
-      </PrivateRoute>
-    ),
+    element: <ResetPassword />,
   },
   {
     path: "/changePassword",
