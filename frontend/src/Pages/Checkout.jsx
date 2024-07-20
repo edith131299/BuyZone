@@ -92,7 +92,7 @@ const Checkout = () => {
 
     // Authenticate error in below code
     const result = await axios.post(
-      "http://13.51.169.22:8000/api/user/order/checkout",
+      "http://buyzone-gjb5.onrender.com/api/user/order/checkout",
       { amount: totalAmount }
     );
 
@@ -118,7 +118,7 @@ const Checkout = () => {
         };
 
         const result = await axios.post(
-          "http://13.51.169.22:8000/api/user/order/paymentVerification",
+          "http://buyzone-gjb5.onrender.com/api/user/order/paymentVerification",
           data
         );
 
@@ -156,6 +156,7 @@ const Checkout = () => {
   useEffect(() => {
     dispatch(getUserCart());
   }, []);
+
   useEffect(() => {
     let total = 0;
     cart.myCart &&
@@ -379,7 +380,6 @@ const Checkout = () => {
           </div>
 
           <div className="w-2/5 max-sm:w-full">
-
             <div className="flex flex-col items-center justify-center border-b  border-zinc-400 py-4 gap-5">
               {cart.myCart &&
                 cart.myCart.map((cart, index) => {
@@ -441,8 +441,10 @@ const Checkout = () => {
               <h5 className="total-price">$ {totalAmount ? totalAmount : 0}</h5>
             </div>
 
-            <div className="w-11/12 flex justify-between items-center center mt-4 max-sm:flex-col max-sm:items-start 
-            min-[600px]:hidden max-sm:mt-8 max-sm:w-full">
+            <div
+              className="w-11/12 flex justify-between items-center center mt-4 max-sm:flex-col max-sm:items-start 
+            min-[600px]:hidden max-sm:mt-8 max-sm:w-full"
+            >
               <Link
                 to="/cart"
                 className="text-dark flex items-center gap-1 mt-[-20px] max-sm:mb-4"
@@ -467,7 +469,6 @@ const Checkout = () => {
                 </button>
               </div>
             </div>
-
           </div>
         </div>
       </Container>

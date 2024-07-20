@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Dropdown, Image } from "react-bootstrap";
+
 import "react-bootstrap-typeahead/css/Typeahead.css";
 
-import Menu, { Item as MenuItem, Divider } from "rc-menu";
 import "rc-dropdown/assets/index.css";
+
 import { BsSearch } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { getAllProducts } from "../features/Product/productSlice";
+
 import { getUserCart, logoutUser } from "../features/User/userSlice";
-import OurStore from "../Pages/OurStore";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const Header = () => {
 
   const searchEvent = (e) => {
     e.preventDefault();
-    
+
     navigate(`/products?search=${search}`);
   };
 

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../features/User/userSlice";
 import { useNavigate } from "react-router-dom";
 import PreviewImage from "../utils/previewImage";
+import Container from "../components/Container";
 
 const signUpSchema = yup.object({
   firstName: yup.string().required("Please enter the First Name"),
@@ -20,7 +21,8 @@ const signUpSchema = yup.object({
     .test(
       "FILE_TYPE",
       "INVALID!",
-      (value) => value && ["image/png/","image/jpg","image/jpeg"].includes(value.type)
+      (value) =>
+        value && ["image/png/", "image/jpg", "image/jpeg"].includes(value.type)
     ),
 });
 
@@ -63,122 +65,140 @@ const SignUp = () => {
   return (
     <>
       <BreadCrumb title={"Sign Up"} />
-      <div className="login-wrapper home-wrapper-2 py-5">
-        <div className="container-xxl">
-          <div className="row">
-            <div className="col-12">
-              <div className="auth-card">
-                <h3 className="text-center mb-4 mt-3">Create Account</h3>
-                <form
-                  className="d-flex flex-column gap-15"
-                  action=""
-                  onSubmit={formik.handleSubmit}
-                >
-                  <CustomInput
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name"
-                    value={formik.values.firstName}
-                    onChange={formik.handleChange("firstName")}
-                    onBlur={formik.handleBlur("firstName")}
+
+      <Container class1="mt-12 py-5 flex justify-center mb-10">
+        <div className="bg-white w-[500px]  rounded-lg p-3 px-6 max-sm:w-[320px] max-sm:text-xs  ">
+          <h3 className="text-center  p-4  font-medium text-[#777]   ">
+            Create Account
+          </h3>
+
+          <form
+            className="flex flex-col gap-4"
+            action=""
+            onSubmit={formik.handleSubmit}
+          >
+            <CustomInput
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              value={formik.values.firstName}
+              onChange={formik.handleChange("firstName")}
+              onBlur={formik.handleBlur("firstName")}
+            />
+
+            <div className="error">
+              {formik.touched.firstName && formik.errors.firstName}
+            </div>
+
+            <CustomInput
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              value={formik.values.lastName}
+              onChange={formik.handleChange("lastName")}
+              onBlur={formik.handleBlur("lastName")}
+            />
+
+            <div className="error">
+              {formik.touched.lastName && formik.errors.lastName}
+            </div>
+            <CustomInput
+              type="telphone"
+              name="mobile"
+              placeholder="Mobile Number"
+              value={formik.values.mobile}
+              onChange={formik.handleChange("mobile")}
+              onBlur={formik.handleBlur("mobile")}
+            />
+
+            <div className="error">
+              {formik.touched.mobile && formik.errors.mobile}
+            </div>
+            <CustomInput
+              type="text"
+              name="email"
+              placeholder="Email Id"
+              value={formik.values.email}
+              onChange={formik.handleChange("email")}
+              onBlur={formik.handleBlur("email")}
+            />
+
+            <div className="error">
+              {formik.touched.email && formik.errors.email}
+            </div>
+            <CustomInput
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formik.values.password}
+              onChange={formik.handleChange("password")}
+              onBlur={formik.handleBlur("password")}
+            />
+
+            <div className="error">
+              {formik.touched.password && formik.errors.password}
+            </div>
+
+            <div>
+              <label
+                className="p-3 rounded-md w-full outline-none"
+                htmlFor="avatar_upload"
+              >
+                Avatar
+              </label>
+
+              <div className="flex  items-center mt-1 py-4 gap-7">
+                <div className="flex items-center">
+                  <figure className="w-16 h-16 	">
+                    {<PreviewImage file={formik.values.avatar} />}
+                  </figure>
+                </div>
+
+                <div className="flex items-center border border-gray-300 gap-12 rounded">
+                  <label
+                    htmlFor="customFile"
+                    className="cursor-pointer bg-blue-500 text-black py-2 px-4 rounded hover:bg-blue-700"
+                  >
+                    Choose Avatar
+                  </label>
+
+                  <input
+                    type="file"
+                    label="Choose Avatar"
+                    name="avatar"
+                    id="customFile"
+                    className="hidden"
+                    ref={fileRef}
+                    onChange={(e) =>
+                      formik.setFieldValue("avatar", e.target.files[0])
+                    }
                   />
 
-                  <div className="error">
-                    {formik.touched.firstName && formik.errors.firstName}
-                  </div>
-
-                  <CustomInput
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name"
-                    value={formik.values.lastName}
-                    onChange={formik.handleChange("lastName")}
-                    onBlur={formik.handleBlur("lastName")}
-                  />
-
-                  <div className="error">
-                    {formik.touched.lastName && formik.errors.lastName}
-                  </div>
-                  <CustomInput
-                    type="telphone"
-                    name="mobile"
-                    placeholder="Mobile Number"
-                    value={formik.values.mobile}
-                    onChange={formik.handleChange("mobile")}
-                    onBlur={formik.handleBlur("mobile")}
-                  />
-
-                  <div className="error">
-                    {formik.touched.mobile && formik.errors.mobile}
-                  </div>
-                  <CustomInput
-                    type="text"
-                    name="email"
-                    placeholder="Email Id"
-                    value={formik.values.email}
-                    onChange={formik.handleChange("email")}
-                    onBlur={formik.handleBlur("email")}
-                  />
-
-                  <div className="error">
-                    {formik.touched.email && formik.errors.email}
-                  </div>
-                  <CustomInput
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange("password")}
-                    onBlur={formik.handleBlur("password")}
-                  />
-
-                  <div className="error">
-                    {formik.touched.password && formik.errors.password}
-                  </div>
-
-                  <div className="d-flex form-control align-items-center mt-3 py-4 gap-5  ">
-                  <figure className="avatar mr-3 item-rtl">
-                      {formik.values.avatar && (
-                        <PreviewImage file={formik.values.avatar} />
-                      )}
-                    </figure>
-                    <input
-                      type="file"
-                      label="Choose Avatar"
-                      name="avatar"
-                      hidden
-                      ref={fileRef}
-                      onChange={(e) =>
-                        formik.setFieldValue("avatar", e.target.files[0])
-                      }
-                    />
-                    <button
-                      className="border p-1 bg-body-tertiary text-secondary"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        fileRef.current.click();
-
-                      }}
-                    >
-                      Upload
-                    </button>
-                  </div>
-
-                  <div className="error">
-                    {formik.touched.avatar && formik.errors.avatar}
-                  </div>
-
-                  <div className="d-flex mt-3 justify-content-center gap-15 align-items-center">
-                    <button type="submit" className="button border-0">
-                      Sign Up
-                    </button>
-                  </div>
-                </form>
+                  <label
+                    className="bg-gray-200 text-gray-500 p-2 rounded-r w-32 text-center cursor-pointer hover:bg-gray-300"
+                    htmlFor="customFile"
+                  >
+                    Browse
+                  </label>
+                </div>
               </div>
             </div>
-          </div>
+
+            <div className="error">
+              {formik.touched.avatar && formik.errors.avatar}
+            </div>
+
+            <div className="flex mt-3 justify-center items-center gap-5 text-sm max-sm:text-xs">
+              <button
+                type="submit"
+                className="rounded-3xl font-normal bg-yellow text-black py-3 px-6 text-center  mb-7 hover:bg-blue hover:text-white"
+              >
+                Sign Up
+              </button>
+            </div>
+          </form>
         </div>
-      </div>
+      </Container>
     </>
   );
 };

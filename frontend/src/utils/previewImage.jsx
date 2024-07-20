@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
+import image from "./default_avatar.png";
+
 const PreviewImage = ({ file }) => {
-  const [preview, setPreview] = useState();
+  const [preview, setPreview] = useState(image);
 
   if (file) {
     const reader = new FileReader();
@@ -10,7 +12,14 @@ const PreviewImage = ({ file }) => {
       setPreview(reader.result);
     };
   }
-  return <img src={preview} name="avatar" alt="avatar" className="object-cover w-4/5 h-full" />;
+  return (
+    <img
+      src={preview}
+      name="avatar"
+      alt="avatar"
+      className="object-fill rounded-full w-16 h-16 "
+    />
+  );
 };
 
 export default PreviewImage;
