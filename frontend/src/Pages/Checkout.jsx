@@ -92,7 +92,7 @@ const Checkout = () => {
 
     // Authenticate error in below code
     const result = await axios.post(
-      "http://buyzone-gjb5.onrender.com/api/user/order/checkout",
+      "https://buyzone-gjb5.onrender.com/api/user/order/checkout",
       { amount: totalAmount }
     );
 
@@ -118,7 +118,7 @@ const Checkout = () => {
         };
 
         const result = await axios.post(
-          "http://buyzone-gjb5.onrender.com/api/user/order/paymentVerification",
+          "https://buyzone-gjb5.onrender.com/api/user/order/paymentVerification",
           data
         );
 
