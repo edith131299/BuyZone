@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Dropdown, Image } from "react-bootstrap";
-
-import "react-bootstrap-typeahead/css/Typeahead.css";
-
-import "rc-dropdown/assets/index.css";
-
 import { BsSearch } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-
 import { getUserCart, logoutUser } from "../features/User/userSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IoIosArrowDropdown } from "react-icons/io";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -25,6 +21,8 @@ const Header = () => {
   const [orderLength, setOrderLength] = useState(0);
 
   const [search, setSearch] = useState(null);
+
+  const [dropdown, setDropDown] = useState(false);
 
   const searchEvent = (e) => {
     e.preventDefault();
@@ -90,7 +88,7 @@ const Header = () => {
         </div>
       </header>
 
-      <header className=" bg-slate-900 py-5">
+      <header className=" bg-slate-900 py-3">
         <div className="max-w-screen-xl mx-auto flex items-center justify-between max-sm:flex-col max-sm:gap-7  max-sm:items-center max-sm:mx-6">
           <h2 className="text-white text-4xl font-medium  max-sm:hidden">
             <Link to="/">Buy Zone </Link>
@@ -111,7 +109,7 @@ const Header = () => {
               />
               <button
                 type="submit"
-                className="bg-yellow h-12 p-3 rounded ml-[-1] rounded-tl-none rounded-bl-none w-12 flex items-center max-sm:h-10"
+                className="bg-yellow h-12 p-3 rounded -ml-2  rounded-tl-none rounded-bl-none w-11 flex items-center max-sm:h-10"
                 id="basic-addon2"
               >
                 <BsSearch className="fs-6" />
@@ -134,42 +132,88 @@ const Header = () => {
 
             <div className="">
               {user ? (
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant="default text-white px-2 i"
-                    id="dropdown-basic"
-                    className="flex items-center"
-                  >
-                    <figure className="avatar pt-2 avatar-nav">
-                      <Image
-                        className=" "
-                        width="30px"
-                        src={user.avatar}
-                      ></Image>
-                    </figure>
-
-                    <p className="mb-0 mt-1 mx-2">
-                      Welcome
-                      <br /> {user.firstName}
-                    </p>
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu className="bg-white flex flex-col">
-                    <Dropdown.Item
-                      className="text-black"
-                      onClick={() => navigate("/myprofile")}
-                    >
-                      Profile
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      onClick={() => logoutHandler()}
-                      className="text-red-600"
-                    >
-                      Logout
-                    </Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
+                <div className="flex flex-row items-center ">
+                  <img
+                    className="w-16 mt-2 rounded object-fill max-sm:hidden"
+                    src={user.avatar ?? "../utils/default_avatar.png"}
+                  ></img>
+                  <p className="mb-0 mt-1 mx-2">
+                    Welcome
+                    <br /> {user.firstName}
+                  </p>
+                  <IoMdArrowDropdown
+                    className="text-2xl "
+                    onClick={() => setDropDown((prev) => !prev)}
+                  />
+                  {dropdown && (
+                    <div className="">
+                      <div className="absolute mt-6 bg-white text-black p-2 rounded -ml-10 border-black border-2">
+                        <ul>
+                          <li
+                            onClick={() => {
+                              setDropDown((prev) => !prev);
+                              navigate("/myprofile");
+                            }}
+                          >
+                            Profile
+                          </li>
+                          <li
+                            onClick={() => {
+                              setDropDown((prev) => !prev);
+                              logoutHandler();
+                            }}
+                            className="text-red-600"
+                          >
+                            Logout
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                </div>
               ) : (
+                // <div>
+                //   <ul>
+                //     <li>Profile</li>
+                //     <li>Logout</li>
+                //   </ul>
+                // </div>
+
+                // <Dropdown>
+                //   <Dropdown.Toggle
+                //     variant="default text-white pr-5 i"
+                //     id="dropdown-basic"
+                //     className="flex items-center "
+                //   >
+                //     <figure className="avatar  avatar-nav">
+                //       <Image
+                //         width="60px"
+                //         src={user.avatar ?? "../utils/default_avatar.png"}
+                //       ></Image>
+                //     </figure>
+
+                //     <p className="mb-0 mt-1 mx-2">
+                //       Welcome
+                //       <br /> {user.firstName}
+                //     </p>
+                //   </Dropdown.Toggle>
+
+                //   <Dropdown.Menu>
+                //     <Dropdown.Item
+                //       className="text-black"
+                //       onClick={() => navigate("/myprofile")}
+                //     >
+                //       Profile
+                //     </Dropdown.Item>
+
+                //     <Dropdown.Item
+                //       onClick={() => logoutHandler()}
+                //       className="text-red-600"
+                //     >
+                //       Logout
+                //     </Dropdown.Item>
+                //   </Dropdown.Menu>
+                // </Dropdown>
                 <Link to={"/Login"}>
                   <p className="text-white mb-0 mt-1 mx-2">
                     Log in <br />
